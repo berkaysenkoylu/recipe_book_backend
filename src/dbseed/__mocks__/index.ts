@@ -1,4 +1,13 @@
-const recipeList = [
+export const userList = [
+  {
+    username: 'frobenius90',
+    email: 'test@test.com',
+    password: 'Password123!',
+    profile_picture: '',
+  },
+];
+
+export const recipeList = [
   {
     name: 'Mercimek Çorbası',
     ingredients: [
@@ -10,6 +19,7 @@ const recipeList = [
     preparation:
       'Mercimek ve doğranmış soğan suda yumuşayana kadar haşlanır. Blenderdan geçirilir ve yağda yakılan nane ile servis edilir.',
     prep_time_minutes: 40,
+    author: '',
   },
   {
     name: 'Tavuk Sote',
@@ -22,6 +32,7 @@ const recipeList = [
     preparation:
       'Tavuklar küp doğranır ve yağda kavrulur. Biber ve domates eklenir, suyunu çekene kadar kısık ateşte pişirilir.',
     prep_time_minutes: 35,
+    author: '',
   },
   {
     name: 'Menemen',
@@ -34,6 +45,7 @@ const recipeList = [
     preparation:
       'Biberler yağda kavrulur, küp doğranmış domatesler eklenir. Domatesler suyunu salınca çırpılmış yumurtalar eklenir ve pişirilir.',
     prep_time_minutes: 35,
+    author: '',
   },
   {
     name: 'Fırında Sebzeli Somon',
@@ -46,6 +58,7 @@ const recipeList = [
     preparation:
       'Sebzeler ve somon fırın tepsisine dizilir. Zeytinyağı ve baharatlarla tatlandırılır. 180°C fırında 20 dakika pişirilir.',
     prep_time_minutes: 25,
+    author: '',
   },
   {
     name: 'Cacık',
@@ -58,6 +71,7 @@ const recipeList = [
     preparation:
       'Yoğurt çırpılır, rendelenmiş salatalık ve ezilmiş sarımsak eklenir. Su ile kıvamı ayarlanır ve nane serpilir.',
     prep_time_minutes: 10,
+    author: '',
   },
   {
     name: 'Basit Makarna (Napoliten)',
@@ -70,6 +84,7 @@ const recipeList = [
     preparation:
       'Makarna haşlanır. Zeytinyağında sarımsak kavrulur, domates püresi ve fesleğen eklenip 15 dakika kaynatılır. Makarnayla karıştırılır.',
     prep_time_minutes: 25,
+    author: '',
   },
   {
     name: 'Fırın Sütlaç',
@@ -82,6 +97,7 @@ const recipeList = [
     preparation:
       'Pirinçler haşlanır. Süt, şeker ve nişasta eklenip kıvam alana kadar pişirilir. Kaselere alınıp fırının üst ızgarasında kızarana kadar beklenir.',
     prep_time_minutes: 60,
+    author: '',
   },
   {
     name: 'Izgara Köfte',
@@ -94,6 +110,7 @@ const recipeList = [
     preparation:
       'Tüm malzemeler yoğrulur ve küçük köfte şekli verilir. Tavada veya ızgarada her iki tarafı pişirilir.',
     prep_time_minutes: 30,
+    author: '',
   },
   {
     name: 'Yoğurtlu Semizotu Salatası',
@@ -105,6 +122,7 @@ const recipeList = [
     preparation:
       'Semizotu iyice yıkanır ve doğranır. Sarımsaklı yoğurt ile karıştırılır. Üzerine zeytinyağı gezdirilerek servis edilir.',
     prep_time_minutes: 10,
+    author: '',
   },
   {
     name: 'Peynirli Omlet',
@@ -117,7 +135,6 @@ const recipeList = [
     preparation:
       'Yumurtalar çırpılır, peynir ve maydanoz eklenir. Yağ eritilmiş tavaya dökülür ve kısık ateşte pişirilir.',
     prep_time_minutes: 8,
+    author: '',
   },
 ];
-
-export default recipeList;

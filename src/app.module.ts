@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RecipeModule } from './recipe/recipe.module';
+import { AuthModule } from './auth/auth.module';
+import { DbSeedModule } from './dbseed/dbseed.module';
 
 @Module({
   imports: [
@@ -17,6 +19,8 @@ import { RecipeModule } from './recipe/recipe.module';
       synchronize: true,
     }),
     RecipeModule,
+    AuthModule,
+    DbSeedModule,
   ],
 })
 export class AppModule {}

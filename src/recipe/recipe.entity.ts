@@ -1,4 +1,11 @@
-import { PrimaryGeneratedColumn, Column, Entity, Index } from 'typeorm';
+import { User } from 'src/auth/user.entity';
+import {
+  PrimaryGeneratedColumn,
+  Column,
+  Entity,
+  Index,
+  ManyToOne,
+} from 'typeorm';
 
 interface Ingredient {
   name: string;
@@ -22,4 +29,7 @@ export class Recipe {
 
   @Column()
   prep_time_minutes: number;
+
+  @ManyToOne(() => User, (user) => user.my_recipes)
+  author: User;
 }

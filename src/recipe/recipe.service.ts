@@ -1,27 +1,16 @@
-import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { RecipeRepository } from './recipe.repository';
-import type { RecipeListResponseType } from './recipe.type';
-import recipeList from 'src/__mocks__';
+import { GetRecipesFilterDto } from './dto/get-recipes-filter.dto';
+import type { RecipeListResponseType, RecipeResponseType } from './recipe.type';
 
 @Injectable()
-export class RecipeService implements OnModuleInit {
+export class RecipeService {
   constructor(private recipeRepository: RecipeRepository) {}
 
-  async onModuleInit() {
-    const count = await this.recipeRepository.count();
-    if (count === 0) {
-      await this.seedRecipes();
-    }
-  }
-
-  private async seedRecipes() {
-    const dummyRecipes = [...recipeList];
-    await this.recipeRepository.save(dummyRecipes);
-    console.log('✅ Veritabanı başarıyla seedlendi!');
-  }
-
-  async getRecipes(): Promise<RecipeListResponseType> {
-    const recipeList = await this.recipeRepository.getRecipes();
+  async getRecipes(
+    filterDto: GetRecipesFilterDto
+  ): Promise<RecipeListResponseType> {
+    const recipeList = await this.recipeRepository.getRecipes(filterDto);
 
     // TODO: This is to be replaced later.
     if (!recipeList) {
@@ -34,6 +23,24 @@ export class RecipeService implements OnModuleInit {
     return {
       message: 'Recipe list has been successfully fetched!',
       recipeList,
+    };
+  }
+
+  async getRecipeById(id: string): Promise<RecipeResponseType> {
+    const fetchedRecipe = await this.recipeRepository.findOne({
+      where: { id },
+      relations: {
+        author: true,
+      },
+    });
+
+    if (!fetchedRecipe) {
+      throw new NotFoundException('No such recipe was found!');
+    }
+
+    return {
+      message: 'Recipe with the given id has been successfully fetched!',
+      recipe: fetchedRecipe,
     };
   }
 }
