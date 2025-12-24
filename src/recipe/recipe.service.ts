@@ -2,15 +2,19 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { RecipeRepository } from './recipe.repository';
 import { GetRecipesFilterDto } from './dto/get-recipes-filter.dto';
 import type { RecipeListResponseType, RecipeResponseType } from './recipe.type';
+import { User } from 'src/auth/user.entity';
 
 @Injectable()
 export class RecipeService {
   constructor(private recipeRepository: RecipeRepository) {}
 
   async getRecipes(
-    filterDto: GetRecipesFilterDto
+    filterDto: GetRecipesFilterDto,
+    user: User
   ): Promise<RecipeListResponseType> {
     const recipeList = await this.recipeRepository.getRecipes(filterDto);
+
+    console.log(user);
 
     // TODO: This is to be replaced later.
     if (!recipeList) {
