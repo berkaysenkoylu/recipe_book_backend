@@ -13,15 +13,13 @@ export interface RecipeType {
   preparation: string;
   prep_time_minutes: number;
   author: User;
-  ingredients: IngredientType;
+  ingredients: IngredientType[];
 }
 
 export interface RecipeListResponseType extends BaseResponseType {
-  // TODO: Type is to be defined
-  recipeList: any[];
+  recipeList: RecipeType[];
 }
 
 export interface RecipeResponseType extends BaseResponseType {
-  // TODO: Type is to be defined
-  recipe: any;
+  recipe: RecipeType;
 }
