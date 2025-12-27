@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { RecipeModule } from './recipe/recipe.module';
 import { AuthModule } from './auth/auth.module';
 import { DbSeedModule } from './dbseed/dbseed.module';
+import { IngredientModule } from './ingredient/ingredient.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { DbSeedModule } from './dbseed/dbseed.module';
       synchronize: true,
     }),
     RecipeModule,
+    IngredientModule,
     AuthModule,
     DbSeedModule,
   ],

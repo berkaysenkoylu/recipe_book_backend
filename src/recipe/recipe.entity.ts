@@ -1,16 +1,12 @@
 import { User } from 'src/auth/user.entity';
+import { RecipeIngredient } from 'src/ingredient/recipe-ingredient.entity';
 import {
   PrimaryGeneratedColumn,
   Column,
   Entity,
-  Index,
   ManyToOne,
+  OneToMany,
 } from 'typeorm';
-
-interface Ingredient {
-  name: string;
-  amount: string;
-}
 
 @Entity('Recipe')
 export class Recipe {
@@ -20,10 +16,6 @@ export class Recipe {
   @Column()
   name: string;
 
-  @Index({ fulltext: true })
-  @Column({ type: 'jsonb' })
-  ingredients: Ingredient[];
-
   @Column()
   preparation: string;
 
@@ -32,4 +24,7 @@ export class Recipe {
 
   @ManyToOne(() => User, (user) => user.my_recipes)
   author: User;
+
+  @OneToMany(() => RecipeIngredient, (ri) => ri.recipe)
+  recipeIngredients: RecipeIngredient[];
 }

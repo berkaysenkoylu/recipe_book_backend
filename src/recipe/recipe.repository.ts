@@ -9,10 +9,13 @@ export class RecipeRepository extends Repository<Recipe> {
     super(Recipe, dataSource.createEntityManager());
   }
 
-  async getRecipes(filterDto: GetRecipesFilterDto): Promise<Recipe[]> {
+  async getRecipes(filterDto: GetRecipesFilterDto) {
     const { search, ingredients } = filterDto;
 
-    const query = this.createQueryBuilder('recipe');
+    const query = this.createQueryBuilder('recipe')
+      .leftJoinAndSelect('recipe.author', 'user')
+      .leftJoinAndSelect('recipe.recipeIngredients', 'recipeIngredient')
+      .leftJoinAndSelect('recipeIngredient.ingredient', 'ingredient');
 
     if (search) {
       query.andWhere(
@@ -22,22 +25,39 @@ export class RecipeRepository extends Repository<Recipe> {
     }
 
     if (ingredients && ingredients.length > 0) {
-      ingredients.forEach((ing, index) => {
-        query.andWhere(
-          `EXISTS (
-          SELECT 1 
-          FROM jsonb_array_elements(recipe.ingredients) AS elem 
-          WHERE elem->>'name' ILIKE :ingName${index}
-        )`,
-          { [`ingName${index}`]: `%${ing}%` }
-        );
+      query.andWhere('ingredient.name IN (:...ingNames)', {
+        ingNames: ingredients.map((i) => i.toLowerCase()),
       });
     }
 
-    query.leftJoinAndSelect('recipe.author', 'user');
-
     try {
-      return query.getMany();
+      const fetchedRecipes = await query.getMany();
+
+      const modifiedRecipes = fetchedRecipes.map((recipe) => {
+        const {
+          id,
+          name,
+          preparation,
+          prep_time_minutes,
+          author,
+          recipeIngredients: recipeIngredients_,
+        } = recipe;
+        return {
+          id,
+          name,
+          preparation,
+          prep_time_minutes,
+          author,
+          ingredients: recipeIngredients_.map((ri) => {
+            return {
+              ...ri,
+              name: ri.ingredient.name,
+            };
+          }),
+        };
+      });
+
+      return modifiedRecipes;
     } catch (error) {
       console.error('Error while fetching the data: ', error);
       throw error;

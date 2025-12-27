@@ -7,6 +7,108 @@ export const userList = [
   },
 ];
 
+export const ingredientList = [
+  {
+    name: 'Kırmızı Mercimek',
+  },
+  {
+    name: 'Soğan',
+  },
+  {
+    name: 'Sıvı Yağ',
+  },
+  {
+    name: 'Nane',
+  },
+  {
+    name: 'Tavuk Göğsü',
+  },
+  {
+    name: 'Biber (Karışık)',
+  },
+  {
+    name: 'Domates',
+  },
+  {
+    name: 'Zeytinyağı',
+  },
+  {
+    name: 'Yumurta',
+  },
+  {
+    name: 'Sivri Biber',
+  },
+  {
+    name: 'Tereyağı',
+  },
+  {
+    name: 'Somon Fileto',
+  },
+  {
+    name: 'Brokoli',
+  },
+  {
+    name: 'Limon',
+  },
+  {
+    name: 'Yoğurt',
+  },
+  {
+    name: 'Salatalık',
+  },
+  {
+    name: 'Sarımsak',
+  },
+  {
+    name: 'Nane (Kuru)',
+  },
+  {
+    name: 'Spaghetti Makarna',
+  },
+  {
+    name: 'Domates Püresi',
+  },
+  {
+    name: 'Fesleğen',
+  },
+  {
+    name: 'Süt',
+  },
+  {
+    name: 'Pirinç',
+  },
+  {
+    name: 'Şeker',
+  },
+  {
+    name: 'Nişasta',
+  },
+  {
+    name: 'Kıyma',
+  },
+  {
+    name: 'Ekmek İçi/Galeta Unu',
+  },
+  {
+    name: 'Soğan (Rendelenmiş)',
+  },
+  {
+    name: 'Kimyon',
+  },
+  {
+    name: 'Semizotu',
+  },
+  {
+    name: 'Sarımsaklı Yoğurt',
+  },
+  {
+    name: 'Beyaz Peynir',
+  },
+  {
+    name: 'Maydanoz',
+  },
+];
+
 export const recipeList = [
   {
     name: 'Mercimek Çorbası',

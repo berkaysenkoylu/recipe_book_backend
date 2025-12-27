@@ -33,18 +33,44 @@ export class RecipeService {
   async getRecipeById(id: string): Promise<RecipeResponseType> {
     const fetchedRecipe = await this.recipeRepository.findOne({
       where: { id },
-      relations: {
-        author: true,
-      },
+      relations: [
+        'author',
+        'recipeIngredients.ingredient',
+        'recipeIngredients',
+      ],
     });
 
     if (!fetchedRecipe) {
       throw new NotFoundException('No such recipe was found!');
     }
 
+    const {
+      id: ID,
+      name,
+      preparation,
+      prep_time_minutes,
+      author,
+      recipeIngredients,
+    } = fetchedRecipe;
+
+    const modifiedRecipe = {
+      id: ID,
+      name,
+      preparation,
+      prep_time_minutes,
+      author,
+      ingredients: recipeIngredients.map((ri) => {
+        return {
+          id: ri.id,
+          name: ri.ingredient.name,
+          amount: ri.amount,
+        };
+      }),
+    };
+
     return {
       message: 'Recipe with the given id has been successfully fetched!',
-      recipe: fetchedRecipe,
+      recipe: modifiedRecipe,
     };
   }
 }
